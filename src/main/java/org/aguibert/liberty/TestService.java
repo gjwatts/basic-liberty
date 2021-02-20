@@ -13,6 +13,9 @@ import javax.transaction.UserTransaction;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
+import org.aguibert.liberty.Child;
+import org.aguibert.liberty.SealedClassTest;
+
 @Path("/")
 @ApplicationScoped
 public class TestService {
@@ -49,6 +52,16 @@ public class TestService {
 
         testJPA();
         testSwitchExpressions();
+
+        // Java 15 specific test
+        String result = EdDSATest.test();
+        log(result);
+        assertEquals("Successfully created an EdDSA KeyFactory", result);
+
+        // Java 15 specific test
+        result = SealedClassTest.test();
+        log(result);
+        assertEquals("Hello from the child", result);
 
         log("Text block literal is:");
         log(query);
